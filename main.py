@@ -1,14 +1,14 @@
 import dessin
 
-print("Bienvenue dans le pendu !")
+print("Welcome to the hangman !")
 continuer = True
 
 while continuer == True:
 
 # Ajout du mot à deviner et dissimulation de la console
-    mot_a_lowercaser = input("Joueur 1, inscris le mot à deviner :\n> ")
+    mot_a_lowercaser = input("Player 1, type the word to guess :\n> ")
     mot_cache = mot_a_lowercaser.lower()
-    print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+    print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
     
 
 # Initialisation du jeu
@@ -17,27 +17,33 @@ while continuer == True:
         mot_devine += "_"
     compteur = 8
     lettres_ratees = []
-    print("Salut joueur 2, maintenant que ton ami a saisi un mot, nous pouvons passer aux choses sérieuses !")
+    print("Hello Player 2, now it is time to guess the word !")
 
 # Déroulé du jeu
     while compteur != 0 and mot_cache != mot_devine:
         print(dessin.dessine(compteur))
-        print("Mot à deviner : " + mot_devine)
+        print("Word to guess : " + mot_devine)
         if lettres_ratees != []:
             message_ratees = ""
             for i in lettres_ratees:
                 message_ratees += i.upper()
                 message_ratees += " "
-            print("Lettres ratées : " + message_ratees)
+            print("Wrong letters : " + message_ratees)
 
-        lettre_a_lower_caser = input("\nInscris une lettre \n> ")
+        lettre_a_lower_caser = input("\nWrite a letter \n> ")
         lettre = lettre_a_lower_caser.lower()
 
         if lettre in lettres_ratees or lettre in mot_devine:
-            print("Hm, tu as déja essayé cette lettre.")
+            print("Hm, you already tried this one.")
+        
+        elif lettre not in "abcdefghijklmnopqrstuvwxyz":
+            print("A letter, please.")
+
+        elif len(lettre) > 1:
+            print("Just one letter at a time, please.")
 
         elif lettre in mot_cache:
-            print("Bien joué ! La lettre " + lettre.upper() + " est dans le mot")
+            print("Good job ! The letter " + lettre.upper() + " is in the word")
             update_devine = ""
             for i in range(len(mot_cache)):
                 if mot_cache[i] == lettre:
@@ -47,22 +53,23 @@ while continuer == True:
             mot_devine = update_devine
 
         else:
-            print("Raté ! La lettre " + lettre.upper() + " n'est pas dans le mot")
+            print("Damn ! The letter " + lettre.upper() + " is not in the word")
             lettres_ratees.append(lettre)
             compteur -= 1
 
     if compteur == 0:
         print(dessin.dessine(compteur))
-        print("\nIl est mort, Jim... Le mot à deviner était " + mot_cache)
+        print("\nHe's dead, Mike... the word was " + mot_cache)
     else:
-        print("\nVICTOIRE ! Le mot à deviner était " + mot_cache)
-        print("Tu étais à " + str(compteur) + " erreurs de la mort...")
+        print("\nVICTORY ! The word was " + mot_cache)
+        if compteur > 1:
+            print("You were " + str(compteur) + " steps away from death...")
+        else:
+            print("You were one little step away from death...")
 
 # Nouvelle partie ?
-    nouv_partie = input("Veux-tu reprendre une nouvelle partie ? (réponds \"oui\" si tu veux continuer, n'importe quoi d'autre pour arrêter) \n> ")
+    nouv_partie = input("Do you want to play another game ? (answer \"yes\" if you do, anything else if you don't) \n> ")
     nouv = nouv_partie.lower()
-    if nouv != "oui":
+    if nouv != "yes":
         continuer = False
-        print("Très bien, merci d'avoir joué !")
-    else:
-        print("Super, on s'en refait une !")
+        print("Fair enough, have a nice day !")
