@@ -1,4 +1,4 @@
-import(dessin)
+import dessin
 
 print("Bienvenue dans le pendu !")
 continuer = True
@@ -21,7 +21,8 @@ while continuer == True:
 
 # Déroulé du jeu
     while compteur != 0 and mot_cache != mot_devine:
-        print("Mot à deviner : " + mot_devine + "\nNombre d'erreurs restantes : " + str(compteur))
+        print(dessin.dessine(compteur))
+        print("Mot à deviner : " + mot_devine)
         if lettres_ratees != []:
             message_ratees = ""
             for i in lettres_ratees:
@@ -51,12 +52,14 @@ while continuer == True:
             compteur -= 1
 
     if compteur == 0:
+        print(dessin.dessine(compteur))
         print("\nIl est mort, Jim... Le mot à deviner était " + mot_cache)
     else:
         print("\nVICTOIRE ! Le mot à deviner était " + mot_cache)
+        print("Tu étais à " + str(compteur) + " erreurs de la mort...")
 
 # Nouvelle partie ?
-    nouv_partie = input("Veux-tu reprendre une nouvelle partie ? (réponds \"oui\" si tu veux continuer, n'importe quoi d'autre pour arrêter \n> ")
+    nouv_partie = input("Veux-tu reprendre une nouvelle partie ? (réponds \"oui\" si tu veux continuer, n'importe quoi d'autre pour arrêter) \n> ")
     nouv = nouv_partie.lower()
     if nouv != "oui":
         continuer = False
